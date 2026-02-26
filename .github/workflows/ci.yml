@@ -1,0 +1,57 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpassword
+          POSTGRES_DB: nextjs_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npm run prisma:generate
+        env:
+          DATABASE_URL: "postgresql://testuser:testpassword@localhost:5432/nextjs_db"
+
+      - name: Run database migrations
+        run: npm run db:push
+        env:
+          DATABASE_URL: "postgresql://testuser:testpassword@localhost:5432/nextjs_db"
+
+      - name: Build project
+        run: npm run build
+        env:
+          DATABASE_URL: "postgresql://testuser:testpassword@localhost:5432/nextjs_db"
+
+      - name: Run linter
+        run: npm run lint
+        continue-on-error: true
