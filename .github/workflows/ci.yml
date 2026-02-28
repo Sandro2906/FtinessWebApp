@@ -42,6 +42,11 @@ jobs:
         env:
           DATABASE_URL: "postgresql://testuser:testpassword@localhost:5432/nextjs_db"
 
+      - name: Run database migrations
+        run: npm run db:push
+        env:
+          DATABASE_URL: "postgresql://testuser:testpassword@localhost:5432/nextjs_db"
+
       - name: Build project
         run: npm run build
         env:

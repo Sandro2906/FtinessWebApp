@@ -3,9 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = env("DATABASE_PROVIDER", "sqlite")
-  // an explicit DATABASE_URL isn't required now; we default to local sqlite file
-  url      = env("DATABASE_URL", "file:./dev.db")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {

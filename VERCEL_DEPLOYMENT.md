@@ -51,22 +51,21 @@ Idi u: **Settings** → **Environment Variables**
 **Obavezno dodaj:**
 
 ### DATABASE_URL (OBAVEZNO!)
-> Ako ne postaviš nijednu `DATABASE_URL`, aplikacija će se svejedno buildati jer koristi SQLite/memorijsku zamku.
-> U tom slučaju podaci neće preživjeti restart serverless funkcija, ali build neće padati.
+Trebam PostgreSQL bazu. Izbori:
 
-Izbor 1: **Vercel PostgreSQL** (Preporučeno)
-- U "Storage" tab-u dodaj "Postgres"Database
+**Izbor 1: Vercel PostgreSQL** (Preporučeno)
+- U "Storage" tab-u dodaj "Postgres Database"
 - Environment će biti automatski postavljen!
 
-Izbor 2: **Vanjska baza**
+**Izbor 2: Vanjska baza**
 ```
 postgresql://username:password@host:port/database
 ```
 
 Primjeri vanjskih PostgreSQL usluga:
-- **Render.com** (Free tier dostupan)
-- **Railway.app** (Free tier dostupan)
-- **Neon.tech** (Serverless PostgreSQL)
+- **Render.com** (Free tier dostupan) - https://render.com
+- **Railway.app** (Free tier dostupan) - https://railway.app
+- **Neon.tech** (Serverless PostgreSQL) - https://neon.tech
 - **AWS RDS** (Pay as you go)
 - **DigitalOcean** (Managed database)
 
