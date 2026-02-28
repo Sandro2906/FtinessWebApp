@@ -51,6 +51,9 @@ Idi u: **Settings** → **Environment Variables**
 **Obavezno dodaj:**
 
 ### DATABASE_URL (OBAVEZNO!)
+> Ako ne postaviš nijednu `DATABASE_URL`, aplikacija će se svejedno buildati jer koristi SQLite/memorijsku zamku.
+> U tom slučaju podaci neće preživjeti restart serverless funkcija, ali build neće padati.
+
 Izbor 1: **Vercel PostgreSQL** (Preporučeno)
 - U "Storage" tab-u dodaj "Postgres"Database
 - Environment će biti automatski postavljen!

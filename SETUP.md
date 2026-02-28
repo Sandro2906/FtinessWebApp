@@ -15,6 +15,8 @@
 - `prisma/seed.mjs` - Seed script za test podatke
 - Konfiguracija Prisma za automatske migracije
 
+> **Napomena:** baza podataka je sada opciona. Ako ne postaviš `DATABASE_URL` u environment varijable, aplikacija neće pokušavati spojiti se na vanjsku bazu i koristit će in-memory zalihu (podatci se ne čuvaju između poziva) – dobar način da kod builda bez postavljanja DB na Vercel.
+
 ### 3. ✅ Environment Konfiguracija
 - `.env` - Lokalna development konfiguracija sa Docker PostgreSQL
 - `.env.local` - Lokalni override (git-ignored)
